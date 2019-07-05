@@ -1,7 +1,10 @@
 .Palette {
+  width: 100wh;
   height: 100vh;
 }
 
 .Palette-colors {
   height: 90%;
+  display: flex;
+  flex-wrap: wrap;
 }
