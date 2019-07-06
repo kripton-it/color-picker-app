@@ -9,3 +9,34 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.Palette .slider {
+  width: 340px;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.rc-slider-track {
+  /* Стили для следа */
+  /* background-color: transparent !important; */
+  height: 8px;
+}
+
+.rc-slider-handle,
+.rc-slider-handle:hover,
+.rc-slider-handle:focus,
+.rc-slider-handle:active {
+  /* Стили для ручки */
+  margin-top: -3px;
+  background-color: green;
+  outline: none;
+  border: 2px solid green;
+  box-shadow: none;
+  width: 13px;
+  height: 13px;
+}
+
+.rc-slider-rail {
+  /* Стили для дорожки */
+  height: 8px;
+}
