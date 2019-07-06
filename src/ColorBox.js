@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './ColorBox.css';
 
 class ColorBox extends Component {
@@ -9,19 +10,23 @@ class ColorBox extends Component {
     };
   }
   render() {
-    const {color, name} = this.props.background;
+    const {background, name} = this.props;
     return (
-      <div style={{backgroundColor: color}} className="ColorBox">
-        <div className="copy-container">
-          <div className="box-content">
-            <span>{name}</span>
+      <CopyToClipboard text={background}>
+        <div style={{backgroundColor: background}} className="ColorBox">
+          <div className="copy-container">
+            <div className="box-content">
+              <span>{name}</span>
+            </div>
+            <button className="copy-button">Copy</button>
           </div>
-          <button className="copy-button">Copy</button>
+          <span className="see-more">More</span>
         </div>
-        <span className="see-more">More</span>
-      </div>
+      </CopyToClipboard>
     );
   }
 }
 
 export default ColorBox;
+
+/* При желании, можно обернуть в CopyToClipboard только кнопку Copy */
