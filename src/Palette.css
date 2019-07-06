@@ -1,6 +1,7 @@
 .Palette {
   width: 100wh;
   height: 100vh;
+  overflow: hidden;
 }
 
 .Palette-colors {
