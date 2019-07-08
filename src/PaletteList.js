@@ -11,7 +11,6 @@ const styles = {
     justifyContent: 'center',
   },
   container: {
-    outline: '1px solid red',
     width: "50%",
     display: 'flex',
     alignItems: 'stretch',
