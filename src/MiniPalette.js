@@ -1,23 +1,46 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from "@material-ui/styles";
 
 const styles = {
-  main: {
-    backgroundColor: 'purple',
-    border: '3px solid teal',
-    '& h1': {
-      color: 'red'
-    }
+  miniPalette: {
+    backgroundColor: "white",
+    borderRadius: "5px",
+    border: '1px solid black',
+    padding: "0.5rem",
+    position: "relative",
+    overflow: "hidden",
+    cursor: "pointer"
+  },
+  colors: {
+    backgroundColor: "grey"
+  },
+  title: {
+    display: "flex",
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: '0',
+    color: 'black',
+    paddingTop: '0.5rem',
+    fontSize: '1rem',
+    position: 'relative'
+  },
+  emo: {
+    marginLeft: '0.5rem',
+    fontSize: '1.5rem'
   }
 };
 
-const MiniPalette = (props) => {
-  const {main} = props.classes;
+const MiniPalette = ({ classes, paletteName, emoji }) => {
+  const { miniPalette, colors, title, emo } = classes;
 
   return (
-    <div className={main}>
-      <h1>Mini Palette</h1>
+    <div className={miniPalette}>
+      <div className={colors} />
+      <h5 className={title}>
+        {paletteName}
+        <span className={emo}>{emoji}</span>
+      </h5>
     </div>
   );
 };
