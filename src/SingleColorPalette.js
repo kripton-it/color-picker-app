@@ -1,17 +1,26 @@
 import React, { Component } from "react";
+import ColorBox from "./ColorBox";
+import Navbar from "./Navbar";
 
 class SingleColorPalette extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      format: "hex"
+    };
   }
   render() {
-    const {match} = this.props;
-    
+    const { palette } = this.props;
+    const { format } = this.state;
+    const colorBoxes = palette.map(color => (
+      <ColorBox key={color.name} format={format} {...color} isSingle />
+    ));
+    console.log(colorBoxes);
     return (
-      <h1>
-        Single Color Page: {match.params.paletteID},{match.params.colorID}
-      </h1>
+      <div className="Palette">
+        {/* <h1>Single Color Palette</h1> */}
+        <div className="Palette-colors">{colorBoxes}</div>
+      </div>
     );
   }
 }

@@ -27,7 +27,7 @@ import chroma from "chroma-js";
   ]
 } */
 
-const levels = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 const getRange = hexColor => {
   const endColor = "#ffffff";
@@ -53,7 +53,10 @@ const generateColor = ({ name, color }, index) => {
     id: name.toLowerCase().replace(/ /g, "-"),
     hex: scale[index],
     rgb: chroma(scale[index]).css(),
-    rgba: chroma(scale[index]).css().replace('rgb', 'rgba').replace(')', ',1.0)'),
+    rgba: chroma(scale[index])
+      .css()
+      .replace("rgb", "rgba")
+      .replace(")", ",1.0)")
   };
   return newColor;
 };
@@ -61,14 +64,22 @@ const generateColor = ({ name, color }, index) => {
 export const generatePalette = ({ paletteName, id, emoji, colors }) => {
   const newColors = {};
   levels.forEach((level, index) => {
-    newColors[level] = colors.map(color => generateColor(color, index));
+    if (level !== 50) {
+      newColors[level] = colors.map(color => generateColor(color, index));
+    }
   });
   const newPalette = {
     paletteName,
     id,
     emoji,
-    colors: newColors,
+    colors: newColors
   };
-  
+
   return newPalette;
+};
+
+export const extractShadesFromPalette = (palette, id) => {
+  return levels.filter(level => level !== 50).map(level =>
+    palette.colors[level].find(color => color.id === id)
+  );
 };
