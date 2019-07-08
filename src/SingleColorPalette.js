@@ -1,4 +1,26 @@
 import React, { Component } from "react";
+
+class SingleColorPalette extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    const {match} = this.props;
+    
+    return (
+      <h1>
+        Single Color Page: {match.params.paletteID},{match.params.colorID}
+      </h1>
+    );
+  }
+}
+
+export default SingleColorPalette;
+
+/*
+
+import React, { Component } from "react";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import "./Palette.css";
@@ -24,9 +46,9 @@ class Palette extends Component {
 
   render() {
     const { level, format } = this.state;
-    const { colors, paletteName, emoji, id } = this.props;
+    const { colors, paletteName, emoji, location } = this.props;
     const colorBoxes = colors[level].map(color => (
-      <ColorBox key={color.id} format={format} moreURL={`/palette/${id}/${color.id}`} {...color} />
+      <ColorBox key={color.id} format={format} location={location} {...color} />
     ));
     return (
       <div className="Palette">
@@ -46,3 +68,6 @@ class Palette extends Component {
 }
 
 export default Palette;
+
+
+*/

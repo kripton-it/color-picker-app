@@ -31,7 +31,7 @@ class ColorBox extends Component {
   }
 
   render() {
-    const { format, name, id, location } = this.props;
+    const { format, name, moreURL } = this.props;
     const { copied } = this.state;
     const color = this.props[format];
 
@@ -52,7 +52,7 @@ class ColorBox extends Component {
             </div>
             <button className="copy-button">Copy</button>
           </div>
-          <Link to={`${location.pathname}/${id}`} onClick={this.handleClick}>
+          <Link to={moreURL} onClick={this.handleClick}>
             <span className="see-more">More</span>
           </Link>
         </div>
