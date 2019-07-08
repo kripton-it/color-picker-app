@@ -6,7 +6,7 @@ import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 
 import seedColors from "./seedColors";
-import { generatePalette, extractShadesFromPalette } from "./colorHelpers";
+import { generatePalette } from "./colorHelpers";
 
 function App() {
   // const palette = generatePalette(seedColors[1]);
@@ -25,10 +25,8 @@ function App() {
         <Route
           exact
           path="/palette/:id"
-          render={routeProps => (
-            <Palette
-              {...generatePalette(findPalette(routeProps.match.params.id))}
-            />
+          render={({ match }) => (
+            <Palette palette={generatePalette(findPalette(match.params.id))} />
           )}
         />
         <Route
@@ -36,10 +34,8 @@ function App() {
           path="/palette/:paletteID/:colorID"
           render={({ match }) => (
             <SingleColorPalette
-              palette={extractShadesFromPalette(
-                generatePalette(findPalette(match.params.paletteID)),
-                match.params.colorID
-              )}
+              palette={generatePalette(findPalette(match.params.paletteID))}
+              colorID={match.params.colorID}
             />
           )}
         />

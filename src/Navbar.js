@@ -46,23 +46,26 @@ class Navbar extends Component {
     const snackbarMessage = (
       <span id="message-id">Format Changed To {format.toUpperCase()}!</span>
     );
+    const slider = level ? (
+      <div className="slider-container">
+        <div className="slider">
+          <span>Level: {level}</span>
+          <Slider
+            defaultValue={level}
+            min={100}
+            max={900}
+            step={100}
+            onChange={changeLevel}
+          />
+        </div>
+      </div>
+    ) : null;
     return (
       <header className="Navbar">
         <div className="logo">
           <Link to="/">React Color Picker</Link>
         </div>
-        <div className="slider-container">
-          <div className="slider">
-            <span>Level: {level}</span>
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onChange={changeLevel}
-            />
-          </div>
-        </div>
+        {slider}
         <div className="select-container">
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
@@ -76,7 +79,7 @@ class Navbar extends Component {
             horizontal: "left"
           }}
           open={open}
-          autoHideDuration={30000}
+          autoHideDuration={3000}
           message={snackbarMessage}
           ContentProps={{
             "aria-describedby": "message-id"
