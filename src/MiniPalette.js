@@ -44,7 +44,7 @@ const styles = {
   }
 };
 
-const MiniPalette = ({ classes, paletteName, emoji, colors }) => {
+const MiniPalette = ({ classes, paletteName, id, emoji, colors, handleClick }) => {
   const { miniPalette, colorBoxes, title, emo, miniColorBox } = classes;
   const miniColorBoxesJSX = colors.map(({ color, name }) => (
     <div
@@ -57,7 +57,7 @@ const MiniPalette = ({ classes, paletteName, emoji, colors }) => {
   ));
 
   return (
-    <div className={miniPalette}>
+    <div className={miniPalette} onClick={() => handleClick(id)}>
       <div className={colorBoxes}>{miniColorBoxesJSX}</div>
       <h5 className={title}>
         {paletteName}
