@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Palette from "./Palette";
+import PaletteList from "./PaletteList";
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 
@@ -11,13 +12,15 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        {/* 
-          Здесь будет Route на главную страницу
-        <Route exact path="/" /> */}
+        <Route
+          exact
+          path="/"
+          render={() => <PaletteList palettes={seedColors} />}
+        />
         <Route
           exact
           path="/palette/:id"
-          render={({match}) => (
+          render={({ match }) => (
             <Palette {...generatePalette(findPalette(match.params.id))} />
           )}
         />
