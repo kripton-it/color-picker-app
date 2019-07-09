@@ -31,19 +31,16 @@ class ColorBox extends Component {
   }
 
   render() {
-    const { format, name, moreURL, isSingle } = this.props;
+    const { format, name, moreURL } = this.props;
     const { copied } = this.state;
     const color = this.props[format];
-    const style = isSingle ? {
-      height: '50%',
-    } : {};
     const moreLink = moreURL ? <Link to={moreURL} onClick={this.handleClick}>
     <span className="see-more">More</span>
   </Link> : null;
 
     return (
       <CopyToClipboard text={color} onCopy={this.changeCopyState}>
-        <div style={{ ...style, backgroundColor: color }} className="ColorBox">
+        <div style={{ backgroundColor: color }} className="ColorBox">
           <div
             className={`copy-overlay${copied ? " show" : ""}`}
             style={{ backgroundColor: color }}
