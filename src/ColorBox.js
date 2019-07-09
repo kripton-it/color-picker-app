@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import chroma from "chroma-js";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./ColorBox.css";
 
@@ -26,17 +27,23 @@ class ColorBox extends Component {
     );
   };
 
-  handleClick = (evt) => {
+  handleClick = evt => {
     evt.stopPropagation();
-  }
+  };
 
   render() {
     const { format, name, moreURL } = this.props;
     const { copied } = this.state;
     const color = this.props[format];
-    const moreLink = moreURL ? <Link to={moreURL} onClick={this.handleClick}>
-    <span className="see-more">More</span>
-  </Link> : null;
+    const isDarkColor = chroma(color).luminance() <= 0.1;
+    const isLightColor = chroma(color).luminance() >= 0.5;
+    const moreLink = moreURL ? (
+      <Link to={moreURL} onClick={this.handleClick}>
+        <span className={`see-more${isLightColor ? " dark-text" : ""}`}>
+          More
+        </span>
+      </Link>
+    ) : null;
 
     return (
       <CopyToClipboard text={color} onCopy={this.changeCopyState}>
@@ -45,15 +52,23 @@ class ColorBox extends Component {
             className={`copy-overlay${copied ? " show" : ""}`}
             style={{ backgroundColor: color }}
           />
-          <div className={`copy-message${copied ? " show" : ""}`}>
+          <div
+            className={`copy-message${copied ? " show" : ""}${
+              isLightColor ? " dark-text" : ""
+            }`}
+          >
             <h1>Copied!</h1>
             <p>{color}</p>
           </div>
           <div className="copy-container">
             <div className="box-content">
-              <span>{name}</span>
+              <span className={isDarkColor ? "light-text" : ""}>{name}</span>
             </div>
-            <button className="copy-button">Copy</button>
+            <button
+              className={`copy-button${isLightColor ? " dark-text" : ""}`}
+            >
+              Copy
+            </button>
           </div>
           {moreLink}
         </div>
