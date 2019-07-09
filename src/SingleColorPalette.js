@@ -26,12 +26,12 @@ class SingleColorPalette extends Component {
     const { paletteName, emoji, id } = this.props.palette;
     const { format } = this.state;
     const colorBoxes = this._extractedColors.map(color => (
-      <ColorBox key={color.name} format={format} {...color} />
+      <ColorBox key={color.name} format={format} {...color} isSinglePalette />
     ));
     console.log(colorBoxes);
     return (
       <div className="Palette SingleColorPalette">
-        <Navbar changeFormat={this.changeFormat} />
+        <Navbar changeFormat={this.changeFormat} isSinglePalette />
         <div className="Palette-colors">
           {colorBoxes}
           <div className="go-back ColorBox">

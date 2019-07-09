@@ -41,12 +41,12 @@ class Navbar extends Component {
   };
 
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, isSinglePalette } = this.props;
     const { format, open } = this.state;
     const snackbarMessage = (
       <span id="message-id">Format Changed To {format.toUpperCase()}!</span>
     );
-    const slider = level ? (
+    const slider = !isSinglePalette ? (
       <div className="slider-container">
         <div className="slider">
           <span>Level: {level}</span>
