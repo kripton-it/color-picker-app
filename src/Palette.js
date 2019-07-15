@@ -4,21 +4,7 @@ import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
 
-const styles = {
-  palette: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100wh',
-    height: '100vh',
-    overflow: 'hidden'
-  },
-  paletteColors: {
-    height: '90vh',
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start'
-  },
-};
+import styles from "./styles/PaletteStyles";
 
 class Palette extends Component {
   constructor(props) {

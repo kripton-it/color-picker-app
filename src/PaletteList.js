@@ -2,43 +2,12 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/styles";
 import MiniPalette from "./MiniPalette";
 
-const styles = {
-  paletteList: {
-    backgroundColor: "blue",
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-  },
-  container: {
-    width: "50%",
-    display: 'flex',
-    alignItems: 'stretch',
-    flexDirection: 'column',
-    // flexWrap: 'wrap',
-  },
-  navbar: {
-    display: 'flex',
-    // width: '100%',
-    justifyContent: 'space-between',
-    color: 'white',
-  },
-  list: {
-    listStyle: 'none',
-    margin: '0',
-    padding: '0',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gridGap: '5%',
-    boxSizing: 'border-box',
-    // width: '100%',
-  }
-};
+import styles from "./styles/PaletteListStyles";
 
 class PaletteList extends Component {
-  redirectToPalette = (id) => {
+  redirectToPalette = id => {
     this.props.history.push(`/palette/${id}`);
-  }
+  };
 
   render() {
     const { palettes, classes } = this.props;
@@ -53,7 +22,10 @@ class PaletteList extends Component {
           <ul className={list}>
             {palettes.map(palette => (
               <li key={palette.id}>
-              <MiniPalette {...palette} handleClick={this.redirectToPalette}/>
+                <MiniPalette
+                  {...palette}
+                  handleClick={this.redirectToPalette}
+                />
               </li>
             ))}
           </ul>
