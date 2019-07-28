@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Palette from "./Palette";
@@ -9,44 +9,62 @@ import NewPaletteForm from "./NewPaletteForm";
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 
-function App() {
-  const findPalette = id => seedColors.find(palette => palette.id === id);
+class App extends Component {
+  state = {
+    palettes: seedColors
+  };
 
-  return (
-    <div className="App">
-      <Switch>
-        <Route
-          exact
-          path="/palette/new"
-          render={() => <NewPaletteForm />}
-        />
-        <Route
-          exact
-          path="/"
-          render={routeProps => (
-            <PaletteList palettes={seedColors} {...routeProps} />
-          )}
-        />
-        <Route
-          exact
-          path="/palette/:id"
-          render={({ match }) => (
-            <Palette palette={generatePalette(findPalette(match.params.id))} />
-          )}
-        />
-        <Route
-          exact
-          path="/palette/:paletteID/:colorID"
-          render={({ match }) => (
-            <SingleColorPalette
-              palette={generatePalette(findPalette(match.params.paletteID))}
-              colorID={match.params.colorID}
-            />
-          )}
-        />
-      </Switch>
-    </div>
-  );
+  findPalette = id => this.state.palettes.find(palette => palette.id === id);
+
+  savePalette = newPalette => {
+    this.setState({
+      palettes: [...this.state.palettes, newPalette]
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Switch>
+          <Route
+            exact
+            path="/palette/new"
+            render={routeProps => (
+              <NewPaletteForm {...routeProps} savePalette={this.savePalette} />
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            render={routeProps => (
+              <PaletteList palettes={this.state.palettes} {...routeProps} />
+            )}
+          />
+          <Route
+            exact
+            path="/palette/:id"
+            render={({ match }) => (
+              <Palette
+                palette={generatePalette(this.findPalette(match.params.id))}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/palette/:paletteID/:colorID"
+            render={({ match }) => (
+              <SingleColorPalette
+                palette={generatePalette(
+                  this.findPalette(match.params.paletteID)
+                )}
+                colorID={match.params.colorID}
+              />
+            )}
+          />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
