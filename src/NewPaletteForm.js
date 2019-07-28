@@ -13,6 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import { ChromePicker } from "react-color";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const drawerWidth = 400;
 
@@ -56,7 +57,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    height: 'calc(100vh - 64px)',
+    height: "calc(100vh - 64px)",
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -72,8 +73,8 @@ const styles = theme => ({
     marginLeft: 0
   },
   colorBoxes: {
-    display: 'flex',
-    height: '100%',
+    display: "flex",
+    height: "100%"
   }
 });
 
@@ -81,8 +82,23 @@ class NewPaletteForm extends Component {
   state = {
     open: true,
     currentColor: "teal",
-    colors: ["purple", "#e15764"]
+    colors: [],
+    newColorName: ""
   };
+
+  componentDidMount() {
+    ValidatorForm.addValidationRule("isColorNameUnique", value =>
+      this.state.colors.every(
+        ({ name }) => name.toLowerCase() !== value.toLowerCase()
+      )
+    );
+    ValidatorForm.addValidationRule("isColorValueUnique", () =>
+      this.state.colors.every(
+        ({ color }) =>
+          color.toLowerCase() !== this.state.currentColor.toLowerCase()
+      )
+    );
+  }
 
   handleDrawerOpen = () => {
     this.setState({
@@ -103,14 +119,25 @@ class NewPaletteForm extends Component {
   };
 
   addNewColor = () => {
+    const newColor = {
+      color: this.state.currentColor,
+      name: this.state.newColorName
+    };
     this.setState({
-      colors: [...this.state.colors, this.state.currentColor]
+      colors: [...this.state.colors, newColor],
+      newColorName: ""
+    });
+  };
+
+  handleColorNameChange = ({ target }) => {
+    this.setState({
+      newColorName: target.value
     });
   };
 
   render() {
     const { classes } = this.props;
-    const { open, currentColor, colors } = this.state;
+    const { open, currentColor, colors, newColorName } = this.state;
 
     return (
       <div className={classes.root}>
@@ -163,14 +190,30 @@ class NewPaletteForm extends Component {
             color={currentColor}
             onChangeComplete={this.updateCurrentColor}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.addNewColor}
-            style={{ backgroundColor: currentColor }}
-          >
-            Add Color
-          </Button>
+          <ValidatorForm onSubmit={this.addNewColor}>
+            <TextValidator
+              value={newColorName}
+              onChange={this.handleColorNameChange}
+              validators={[
+                "required",
+                "isColorNameUnique",
+                "isColorValueUnique"
+              ]}
+              errorMessages={[
+                "Color name is required",
+                "Color name must be unique",
+                "Color already exists"
+              ]}
+            />
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              style={{ backgroundColor: currentColor }}
+            >
+              Add Color
+            </Button>
+          </ValidatorForm>
         </Drawer>
         <main
           className={classNames(classes.content, {
@@ -178,13 +221,11 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
-            <div className={classes.colorBoxes}>
-              {colors.map(color => (
-                <DraggableColorBox key={color} color={color} >
-                  {color}
-                </DraggableColorBox>
-              ))}
-            </div>
+          <div className={classes.colorBoxes}>
+            {colors.map(({ color, name }) => (
+              <DraggableColorBox key={color} color={color} name={name} />
+            ))}
+          </div>
         </main>
       </div>
     );
