@@ -152,6 +152,12 @@ class NewPaletteForm extends Component {
     this.props.history.push("/");
   };
 
+  deleteColor = colorName => {
+    this.setState({
+      colors: this.state.colors.filter(({ name }) => name !== colorName)
+    });
+  };
+
   render() {
     const { classes } = this.props;
     const {
@@ -194,8 +200,11 @@ class NewPaletteForm extends Component {
                 label="Palette Name"
                 name="newPaletteName"
                 onChange={this.handleChange}
-                validators={["required", 'isPaletteNameUnique']}
-                errorMessages={["Palette name is required", 'Palette name must be unique']}
+                validators={["required", "isPaletteNameUnique"]}
+                errorMessages={[
+                  "Palette name is required",
+                  "Palette name must be unique"
+                ]}
               />
               <Button variant="contained" color="primary" type="submit">
                 Save Palette
@@ -265,7 +274,12 @@ class NewPaletteForm extends Component {
           <div className={classes.drawerHeader} />
           <div className={classes.colorBoxes}>
             {colors.map(({ color, name }) => (
-              <DraggableColorBox key={color} color={color} name={name} />
+              <DraggableColorBox
+                key={color}
+                color={color}
+                name={name}
+                onDelete={() => this.deleteColor(name)}
+              />
             ))}
           </div>
         </main>
