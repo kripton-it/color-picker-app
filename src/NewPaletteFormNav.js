@@ -58,10 +58,22 @@ class NewPaletteFormNav extends Component {
     isDialogOpen: false
   };
 
+  focus = () => {
+    const interval = setInterval(() => {
+      const input = document.querySelector("#input");
+      if (input) {
+        input.focus();
+        clearInterval(interval);
+      }
+    }, 100);
+  }
+
   showDialog = () => {
     this.setState({
       isDialogOpen: true
-    });
+    }, this.focus);
+    
+    // document.querySelector(`.${this.props.classes.root}`).querySelector('input').focus();
   };
 
   closeDialog = () => {

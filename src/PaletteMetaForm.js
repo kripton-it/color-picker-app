@@ -33,17 +33,6 @@ class PaletteMetaForm extends Component {
     this.props.handleSubmit(this.state.newPaletteName);
   };
 
-  /* handleClickOpen = () => {
-    this.setState({
-      open: true
-    });
-  };
-
-  handleClose = () => {
-    this.setState({
-      open: false
-    });
-  }; */
   render() {
     const { newPaletteName } = this.state;
     const { handleClose, open } = this.props;
@@ -63,6 +52,7 @@ class PaletteMetaForm extends Component {
             <TextValidator
               value={newPaletteName}
               label="Palette Name"
+              id="input"
               fullWidth
               margin="normal"
               onChange={this.handleChange}
