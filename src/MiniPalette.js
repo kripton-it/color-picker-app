@@ -10,9 +10,10 @@ const MiniPalette = ({
   id,
   emoji,
   colors,
-  handleClick
+  handleClick,
+  deletePalette
 }) => {
-  const { miniPalette, colorBoxes, title, emo, miniColorBox, deleteButton, deleteIcon } = classes;
+  const { miniPalette, colorBoxes, title, emo, miniColorBox, deleteIcon } = classes;
   const miniColorBoxesJSX = colors.map(({ color, name }) => (
     <div
       className={miniColorBox}
@@ -27,11 +28,14 @@ const MiniPalette = ({
     handleClick(id);
   }
 
+  const handlePaletteDelete = (evt) => {
+    evt.stopPropagation();
+    deletePalette(id);
+  }
+
   return (
     <div className={miniPalette} onClick={handlePaletteClick}>
-      <div className={deleteButton}>
-        <DeleteIcon className={deleteIcon} />
-      </div>
+      <DeleteIcon className={deleteIcon} onClick={handlePaletteDelete} />
       <div className={colorBoxes}>{miniColorBoxesJSX}</div>
       <h5 className={title}>
         {paletteName}

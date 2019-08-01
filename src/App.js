@@ -17,14 +17,29 @@ class App extends Component {
   findPalette = id => this.state.palettes.find(palette => palette.id === id);
 
   updateLocalStorage = () => {
-    window.localStorage.setItem("palettes", JSON.stringify(this.state.palettes));
-  }
+    window.localStorage.setItem(
+      "palettes",
+      JSON.stringify(this.state.palettes)
+    );
+  };
 
   savePalette = newPalette => {
     const updatedPalettes = [...this.state.palettes, newPalette];
-    this.setState({
-      palettes: updatedPalettes
-    }, this.updateLocalStorage);
+    this.setState(
+      {
+        palettes: updatedPalettes
+      },
+      this.updateLocalStorage
+    );
+  };
+
+  deletePalette = id => {
+    this.setState(
+      {
+        palettes: this.state.palettes.filter(palette => palette.id !== id)
+      },
+      this.updateLocalStorage
+    );
   };
 
   render() {
@@ -48,7 +63,11 @@ class App extends Component {
             exact
             path="/"
             render={routeProps => (
-              <PaletteList palettes={palettes} {...routeProps} />
+              <PaletteList
+                palettes={palettes}
+                {...routeProps}
+                deletePalette={this.deletePalette}
+              />
             )}
           />
           <Route
