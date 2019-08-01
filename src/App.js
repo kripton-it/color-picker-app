@@ -11,15 +11,20 @@ import { generatePalette } from "./colorHelpers";
 
 class App extends Component {
   state = {
-    palettes: seedColors
+    palettes: JSON.parse(window.localStorage.getItem("palettes")) || seedColors
   };
 
   findPalette = id => this.state.palettes.find(palette => palette.id === id);
 
+  updateLocalStorage = () => {
+    window.localStorage.setItem("palettes", JSON.stringify(this.state.palettes));
+  }
+
   savePalette = newPalette => {
+    const updatedPalettes = [...this.state.palettes, newPalette];
     this.setState({
-      palettes: [...this.state.palettes, newPalette]
-    });
+      palettes: updatedPalettes
+    }, this.updateLocalStorage);
   };
 
   render() {
