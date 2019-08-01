@@ -25,8 +25,8 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   },
   drawerHeader: {
     display: "flex",
@@ -57,18 +57,18 @@ const styles = theme => ({
     height: "100%"
   },
   container: {
-    width: '90%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: "90%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   buttons: {
-    width: '100%'
+    width: "100%"
   },
   button: {
-    width: '50%'
+    width: "50%"
   }
 });
 
@@ -84,11 +84,11 @@ class NewPaletteForm extends Component {
     };
   }
 
-  handleSubmit = newPaletteName => {
+  handleSubmit = palette => {
     const newPalette = {
-      paletteName: newPaletteName,
+      ...palette,
       colors: this.state.colors,
-      id: newPaletteName.toLowerCase().replace(/ /g, "-")
+      id: palette.paletteName.toLowerCase().replace(/ /g, "-")
     };
     this.props.savePalette(newPalette);
     this.props.history.push("/");
@@ -169,7 +169,9 @@ class NewPaletteForm extends Component {
           </div>
           <Divider />
           <div className={classes.container}>
-            <Typography variant="h4" gutterBottom >Design Your Palette</Typography>
+            <Typography variant="h4" gutterBottom>
+              Design Your Palette
+            </Typography>
             <div className={classes.buttons}>
               <Button
                 className={classes.button}

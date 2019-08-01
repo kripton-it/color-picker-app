@@ -13,6 +13,7 @@ class PaletteMetaForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      stage: "name",
       newPaletteName: ""
     };
   }
@@ -31,51 +32,75 @@ class PaletteMetaForm extends Component {
     });
   };
 
-  handleSubmit = () => {
-    this.props.handleSubmit(this.state.newPaletteName);
+  showEmojiPicker = () => {
+    this.setState({
+      stage: "emoji"
+    });
+  };
+
+  handleSubmit = ({ native }) => {
+    const palette = {
+      paletteName: this.state.newPaletteName,
+      emoji: native
+    };
+    this.props.handleSubmit(palette);
   };
 
   render() {
-    const { newPaletteName } = this.state;
-    const { handleClose, open } = this.props;
+    const { newPaletteName, stage } = this.state;
+    const { handleClose } = this.props;
 
     return (
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
-        <ValidatorForm onSubmit={this.handleSubmit}>
-          <DialogContent>
-            <DialogContentText>
-              Please, enter a name for your new palette. Make sure it's unique.
-            </DialogContentText>
-            <Picker />
-            <TextValidator
-              value={newPaletteName}
-              label="Palette Name"
-              id="input"
-              fullWidth
-              margin="normal"
-              onChange={this.handleChange}
-              validators={["required", "isPaletteNameUnique"]}
-              errorMessages={[
-                "Palette name is required",
-                "Palette name must be unique"
-              ]}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button variant="contained" color="primary" type="submit">
-              Save Palette
-            </Button>
-          </DialogActions>
-        </ValidatorForm>
-      </Dialog>
+      <>
+        <Dialog
+          open={stage === "emoji"}
+          onClose={handleClose}
+          aria-labelledby="emoji-dialog-title"
+        >
+          <DialogTitle id="emoji-dialog-title">
+            Choose a Palette Emoji
+          </DialogTitle>
+          <Picker onSelect={this.handleSubmit} title="Pick an Emoji" />
+        </Dialog>
+        <Dialog
+          open={stage === "name"}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">
+            Choose a Palette Name
+          </DialogTitle>
+          <ValidatorForm onSubmit={this.showEmojiPicker}>
+            <DialogContent>
+              <DialogContentText>
+                Please, enter a name for your new palette. Make sure it's
+                unique.
+              </DialogContentText>
+              <TextValidator
+                value={newPaletteName}
+                label="Palette Name"
+                id="input"
+                fullWidth
+                margin="normal"
+                onChange={this.handleChange}
+                validators={["required", "isPaletteNameUnique"]}
+                errorMessages={[
+                  "Palette name is required",
+                  "Palette name must be unique"
+                ]}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button variant="contained" color="primary" type="submit">
+                Save Palette
+              </Button>
+            </DialogActions>
+          </ValidatorForm>
+        </Dialog>
+      </>
     );
   }
 }

@@ -72,8 +72,6 @@ class NewPaletteFormNav extends Component {
     this.setState({
       isDialogOpen: true
     }, this.focus);
-    
-    // document.querySelector(`.${this.props.classes.root}`).querySelector('input').focus();
   };
 
   closeDialog = () => {
@@ -96,7 +94,6 @@ class NewPaletteFormNav extends Component {
         palettes={palettes}
         handleSubmit={handleSubmit}
         handleClose={this.closeDialog}
-        open={isDialogOpen}
       />
     ) : null;
 
