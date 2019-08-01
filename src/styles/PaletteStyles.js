@@ -1,3 +1,5 @@
+import sizes from "../utils/mediaQueries";
+
 export default {
   palette: {
     display: "flex",
@@ -17,6 +19,14 @@ export default {
     height: "50%",
     position: "relative",
     backgroundColor: "black",
+    [sizes.down("md")]: {
+      width: "50%",
+      height: "20%"
+    },
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "10%"
+    },
     "& a": {
       position: "absolute",
       display: "inline-block",

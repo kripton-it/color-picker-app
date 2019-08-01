@@ -1,4 +1,5 @@
 import chroma from "chroma-js";
+import sizes from "../utils/mediaQueries";
 
 export default {
   colorBox: {
@@ -7,7 +8,19 @@ export default {
     position: "relative",
     "&:hover button": {
       opacity: "1"
-    }
+    },
+    [sizes.down("lg")]: {
+      width: ({ isSinglePalette }) => (isSinglePalette ? "20%" : "25%"),
+      height: ({ isSinglePalette }) => (isSinglePalette ? "50%" : "20%")
+    },
+    [sizes.down("md")]: {
+      width: "50% !important",
+      height: ({ isSinglePalette }) => (isSinglePalette ? "20%" : "10%")
+    },
+    [sizes.down("xs")]: {
+      width: "100% !important",
+      height: ({ isSinglePalette }) => (isSinglePalette ? "10%" : "5%")
+    },
   },
   boxContent: {
     position: "absolute",
@@ -111,6 +124,9 @@ export default {
     "& p": {
       fontSize: "2rem",
       fontWeight: "100"
+    },
+    [sizes.down("xs")]: {
+      fontSize: "2rem",
     }
   },
   showMessage: {
