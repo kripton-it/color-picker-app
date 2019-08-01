@@ -25,6 +25,7 @@ const styles = theme => ({
     }),
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     height: "64px"
   },
   appBarShift: {
@@ -41,44 +42,99 @@ const styles = theme => ({
   hide: {
     display: "none"
   },
-  navBtns: {}
+  navBtns: {
+    marginRight: "1rem",
+    "& a": {
+      textDecoration: "none"
+    }
+  },
+  button: {
+    margin: "0 0.5rem"
+  }
 });
 
-const NewPaletteFormNav = ({ classes, open, handleDrawerOpen, handleSubmit, palettes }) => {
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        color="default"
-        className={classNames(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar disableGutters={!open}>
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            onClick={handleDrawerOpen}
-            className={classNames(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit" noWrap>
-            Create a Palette
-          </Typography>
-        </Toolbar>
-        <div className={classes.navBtns}>
-          <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
-          <Link to="/">
-            <Button variant="contained" color="secondary">
-              Go Back
+class NewPaletteFormNav extends Component {
+  state = {
+    isDialogOpen: false
+  };
+
+  showDialog = () => {
+    this.setState({
+      isDialogOpen: true
+    });
+  };
+
+  closeDialog = () => {
+    this.setState({
+      isDialogOpen: false
+    });
+  };
+
+  render() {
+    const {
+      classes,
+      open,
+      handleDrawerOpen,
+      handleSubmit,
+      palettes
+    } = this.props;
+    const { isDialogOpen } = this.state;
+    const dialog = isDialogOpen ? (
+      <PaletteMetaForm
+        palettes={palettes}
+        handleSubmit={handleSubmit}
+        handleClose={this.closeDialog}
+        open={isDialogOpen}
+      />
+    ) : null;
+
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          color="default"
+          className={classNames(classes.appBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <Toolbar disableGutters={!open}>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={handleDrawerOpen}
+              className={classNames(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" noWrap>
+              Create a Palette
+            </Typography>
+          </Toolbar>
+          <div className={classes.navBtns}>
+            <Link to="/">
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="secondary"
+              >
+                Go Back
+              </Button>
+            </Link>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              onClick={this.showDialog}
+            >
+              Save
             </Button>
-          </Link>
-        </div>
-      </AppBar>
-    </div>
-  );
-};
+          </div>
+        </AppBar>
+        {dialog}
+      </div>
+    );
+  }
+}
 
 export default withStyles(styles, { withTheme: true })(NewPaletteFormNav);
