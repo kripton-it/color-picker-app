@@ -6,7 +6,10 @@ export default {
     padding: "0.5rem",
     position: "relative",
     overflow: "hidden",
-    cursor: "pointer"
+    cursor: "pointer",
+    "&:hover svg": {
+      opacity: '1'
+    }
   },
   colorBoxes: {
     backgroundColor: '#dae1e4',
@@ -37,5 +40,22 @@ export default {
     height: '25%',
     position: 'relative',
     marginBottom: '-3.5px',
+  },
+  deleteButton: {
+    
+  },
+  deleteIcon: {
+    color: 'white',
+    backgroundColor: '#eb3d30',
+    borderRadius: '5px',
+    width: '20px',
+    height: '20px',
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    padding: '10px',
+    zIndex: '10',
+    opacity: '0',
+    transition: 'all 0.3s ease-in-out'
   }
 };

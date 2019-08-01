@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import styles from "./styles/MiniPaletteStyles";
 
@@ -11,7 +12,7 @@ const MiniPalette = ({
   colors,
   handleClick
 }) => {
-  const { miniPalette, colorBoxes, title, emo, miniColorBox } = classes;
+  const { miniPalette, colorBoxes, title, emo, miniColorBox, deleteButton, deleteIcon } = classes;
   const miniColorBoxesJSX = colors.map(({ color, name }) => (
     <div
       className={miniColorBox}
@@ -22,8 +23,15 @@ const MiniPalette = ({
     />
   ));
 
+  const handlePaletteClick = () => {
+    handleClick(id);
+  }
+
   return (
-    <div className={miniPalette} onClick={() => handleClick(id)}>
+    <div className={miniPalette} onClick={handlePaletteClick}>
+      <div className={deleteButton}>
+        <DeleteIcon className={deleteIcon} />
+      </div>
       <div className={colorBoxes}>{miniColorBoxesJSX}</div>
       <h5 className={title}>
         {paletteName}
