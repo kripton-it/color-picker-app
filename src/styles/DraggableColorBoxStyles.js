@@ -1,3 +1,6 @@
+
+import sizes from "../utils/mediaQueries";
+
 export default {
   root: {
     height: "25%",
@@ -6,7 +9,19 @@ export default {
     "&:hover svg": {
       color: "white",
       transform: "scale(1.5)"
-    }
+    },
+    [sizes.down("lg")]: {
+      width: "25%",
+      height: "20%"
+    },
+    [sizes.down("md")]: {
+      width: "50%",
+      height: "10%"
+    },
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "5%"
+    },
   },
   boxContent: {
     position: "absolute",

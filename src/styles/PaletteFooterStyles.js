@@ -1,3 +1,5 @@
+import sizes from "../utils/mediaQueries";
+
 export default {
   paletteFooter: {
     display: "flex",
@@ -5,7 +7,10 @@ export default {
     alignItems: "center",
     backgroundColor: "white",
     height: "4vh",
-    fontWeight: "500"
+    fontWeight: "500",
+    [sizes.down("xs")]: {
+      display: 'none'
+    }
   },
   paletteEmoji: {
     fontSize: "1.5rem",

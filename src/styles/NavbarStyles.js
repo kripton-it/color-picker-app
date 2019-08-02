@@ -1,3 +1,6 @@
+
+import sizes from "../utils/mediaQueries";
+
 export default {
   Navbar: {
     display: "flex",
@@ -17,6 +20,9 @@ export default {
     "& a": {
       textDecoration: "none",
       color: "black"
+    },
+    [sizes.down("xs")]: {
+      display: 'none'
     }
   },
   slider: {
@@ -37,6 +43,9 @@ export default {
     },
     "& .rc-slider-rail": {
       height: "8px"
+    },
+    [sizes.down("md")]: {
+      width: '150px'
     }
   },
   selectContainer: {
