@@ -37,6 +37,7 @@ export default {
     justifyContent: "space-between"
   },
   deleteIcon: {
-    transition: "all 0.3s ease-in-out"
+    transition: "all 0.3s ease-in-out",
+    cursor: 'pointer'
   }
 };
