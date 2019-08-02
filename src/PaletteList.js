@@ -12,13 +12,13 @@ class PaletteList extends Component {
 
   render() {
     const { palettes, classes, deletePalette } = this.props;
-    const { paletteList, container, navbar, list } = classes;
+    const { paletteList, container, navbar, list, heading } = classes;
 
     return (
       <div className={paletteList}>
         <div className={container}>
           <nav className={navbar}>
-            <h1>React Color Picker</h1>
+            <h1 className={heading}>React Color Picker</h1>
             <Link to="/palette/new">Create Palette</Link>
           </nav>
           <ul className={list}>

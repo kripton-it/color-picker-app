@@ -1,19 +1,22 @@
 import sizes from "../utils/mediaQueries";
+import bg from './bg.svg';
 
 export default {
   paletteList: {
     backgroundColor: "blue",
+    backgroundImage: `url(${bg})`,
+    /* background by SVGBackgrounds.com */
     height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
+    overflowY: 'auto'
   },
   container: {
     width: "50%",
     display: 'flex',
     alignItems: 'stretch',
     flexDirection: 'column',
-    // flexWrap: 'wrap',
     [sizes.down("xl")]: {
       width: "80%"
     },
@@ -23,7 +26,6 @@ export default {
   },
   navbar: {
     display: 'flex',
-    // width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
     color: 'white',
@@ -31,6 +33,9 @@ export default {
       color: 'inherit',
       textDecoration: 'none'
     }
+  },
+  heading: {
+    fontSize: '2rem'
   },
   list: {
     listStyle: 'none',
@@ -46,7 +51,7 @@ export default {
     },
     [sizes.down("xs")]: {
       gridTemplateColumns: 'repeat(1, 1fr)',
-      gridGap: '1rem',
+      gridGap: '1.5rem',
     },
   }
 };
