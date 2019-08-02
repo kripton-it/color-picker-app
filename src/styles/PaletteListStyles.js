@@ -2,6 +2,15 @@ import sizes from "../utils/mediaQueries";
 import bg from './bg.svg';
 
 export default {
+  "@global": {
+    ".fade-exit": {
+      opacity: 1
+    },
+    ".fade-exit-active": {
+      opacity: 0,
+      transition: 'opacity 0.5s ease-out'
+    }
+  },
   paletteList: {
     backgroundColor: "blue",
     backgroundImage: `url(${bg})`,
@@ -18,7 +27,10 @@ export default {
     alignItems: 'stretch',
     flexDirection: 'column',
     [sizes.down("xl")]: {
-      width: "80%"
+      width: "60%"
+    },
+    [sizes.down("md")]: {
+      width: "70%"
     },
     [sizes.down("xs")]: {
       width: "75%"
@@ -38,9 +50,6 @@ export default {
     fontSize: '2rem'
   },
   list: {
-    listStyle: 'none',
-    margin: '0',
-    padding: '0',
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
     gridGap: '2.5rem',
@@ -52,6 +61,6 @@ export default {
     [sizes.down("xs")]: {
       gridTemplateColumns: 'repeat(1, 1fr)',
       gridGap: '1.5rem',
-    },
+    }
   }
 };
