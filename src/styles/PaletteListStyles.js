@@ -12,7 +12,7 @@ export default {
     }
   },
   paletteList: {
-    backgroundColor: "blue",
+    backgroundColor: "#2022aa",
     backgroundImage: `url(${bg})`,
     /* background by SVGBackgrounds.com */
     height: '100vh',

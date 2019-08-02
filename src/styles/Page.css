@@ -1,0 +1,32 @@
+.page {
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.page-enter {
+  opacity: 0.5;
+  transform: translateX(100%);
+}
+/* 
+.pageBack-enter {
+  opacity: 0.5;
+  transform: translateX(-100%);
+} */
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-exit-active {
+  opacity: 0.5;
+  transform: translateX(-100%);
+}
+/* 
+.pageBack-exit-active {
+  opacity: 0.5;
+  transform: translateX(100%);
+} */
