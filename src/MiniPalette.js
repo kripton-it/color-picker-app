@@ -11,7 +11,7 @@ const MiniPalette = ({
   emoji,
   colors,
   handleClick,
-  deletePalette
+  openDialog
 }) => {
   const { miniPalette, colorBoxes, title, emo, miniColorBox, deleteIcon } = classes;
   const miniColorBoxesJSX = colors.map(({ color, name }) => (
@@ -30,7 +30,7 @@ const MiniPalette = ({
 
   const handlePaletteDelete = (evt) => {
     evt.stopPropagation();
-    deletePalette(id);
+    openDialog(id);
   }
 
   return (
