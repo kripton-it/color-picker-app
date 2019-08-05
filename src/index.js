@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/color-picker-app">
     <App />
   </BrowserRouter>,
   document.getElementById("root")
