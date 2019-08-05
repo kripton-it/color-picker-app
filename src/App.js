@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import Page from "./Page";
@@ -113,6 +113,7 @@ class App extends Component {
                       </Page>
                     )}
                   />
+                  <Redirect to="/" />
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

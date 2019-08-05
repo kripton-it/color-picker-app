@@ -16,7 +16,6 @@ class MiniPalette extends PureComponent {
 
   render() {
     const { classes, paletteName, emoji, colors } = this.props;
-    console.log("RENDERING: ", paletteName);
     const {
       miniPalette,
       colorBoxes,

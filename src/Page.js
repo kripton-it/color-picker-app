@@ -1,9 +1,8 @@
 import React from "react";
-// import classNames from "classnames";
 
 import './styles/Page.css';
 
-const Page = ({ children, toLeft }) => {
+const Page = ({ children }) => {
   return <section className="page">{children}</section>;
 };
 

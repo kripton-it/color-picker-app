@@ -12,6 +12,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import { arrayMove } from "react-sortable-hoc";
 
+import seedColors from "./utils/seedColors";
 import styles from "./styles/NewPaletteFormStyles";
 
 class NewPaletteForm extends Component {
@@ -22,7 +23,7 @@ class NewPaletteForm extends Component {
     super(props);
     this.state = {
       open: true,
-      colors: this.props.palettes[0].colors
+      colors: seedColors[0].colors
     };
   }
 
@@ -61,10 +62,15 @@ class NewPaletteForm extends Component {
   };
 
   addRandomColor = () => {
-    const allColors = this.props.palettes.map(({ colors }) => colors).flat();
+    // собираем все цвета из всех палитр и выбираем те, которых нет в текущей палитре
+    const allColors = this.props.palettes
+      .map(({ colors }) => colors)
+      .flat()
+      .filter(({ name }) =>
+        this.state.colors.every(color => color.name !== name)
+      );
     const randomIndex = Math.floor(Math.random() * allColors.length);
     const randomColor = allColors[randomIndex];
-    // нужна валидация
     this.setState({
       colors: [...this.state.colors, randomColor]
     });
@@ -128,7 +134,7 @@ class NewPaletteForm extends Component {
                 variant="contained"
                 color="primary"
                 onClick={this.addRandomColor}
-                disabled={isPaletteFull}
+                disabled={isPaletteFull || palettes.length === 0}
               >
                 Random Color
               </Button>

@@ -1,4 +1,4 @@
-
+import chroma from "chroma-js";
 import sizes from "../utils/mediaQueries";
 
 export default {
@@ -29,7 +29,8 @@ export default {
     width: "100%",
     left: "0",
     bottom: "0",
-    color: "rgba(0, 0, 0, 0.5)",
+    color: props =>
+      chroma(props.color).luminance() <= 0.1 ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.5)",
     letterSpacing: "1px",
     fontSize: "12px",
     textTransform: "uppercase",
